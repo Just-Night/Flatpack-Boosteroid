@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Boosteroid
+Comment=Boosteroid Game Streaming
+Exec=Boosteroid
+Icon=boosteroid-icon
+Terminal=false
+Type=Application
+Categories=Game;

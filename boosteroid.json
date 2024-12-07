@@ -1,0 +1,63 @@
+{
+  "app-id": "com.boosteroid.app",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "24.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "Boosteroid",
+  "modules": [
+      {
+          "name": "libnuma",
+          "buildsystem": "autotools",
+          "config-opts": [
+              "--prefix=/app"
+          ],
+          "sources": [
+              {
+                  "type": "archive",
+                  "url": "https://github.com/numactl/numactl/archive/refs/tags/v2.0.14.tar.gz",
+                  "sha256": "1ee27abd07ff6ba140aaf9bc6379b37825e54496e01d6f7343330cf1a4487035"
+              }
+          ]
+      },
+      {
+          "name": "boosteroid",
+          "buildsystem": "simple",
+          "build-commands": [
+              "cp -r * /app/"
+          ],
+          "sources": [
+              {
+                  "type": "dir",
+                  "path": "./boosteroid-files/opt/BoosteroidGamesS.R.L."
+              }
+          ]
+      },
+      {
+          "name": "desktop-integration",
+          "buildsystem": "simple",
+          "build-commands": [
+              "mkdir -p /app/share/applications",
+              "mkdir -p /app/share/icons/hicolor/scalable/apps",
+              "cp Boosteroid.desktop /app/share/applications/",
+              "cp boosteroid-icon.svg /app/share/icons/hicolor/scalable/apps/"
+          ],
+          "sources": [
+              {
+                  "type": "file",
+                  "path": "./Boosteroid.desktop"
+              },
+              {
+                  "type": "file",
+                  "path": "./boosteroid-icon.svg"
+              }
+          ]
+      }
+  ],
+  "finish-args": [
+      "--share=network",
+      "--socket=x11",
+      "--socket=wayland",
+      "--device=dri",
+      "--filesystem=home"
+  ]
+}
